@@ -18,6 +18,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	
+
+private:
+
+	ATank * GetPlayerTank() const;
 	
 };
