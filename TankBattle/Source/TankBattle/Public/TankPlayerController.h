@@ -17,9 +17,6 @@ public:
 	ATank * GetControlledTank() const;
 
 protected:
-
-public:
-
-private:
+	virtual void BeginPlay() override;
 
 };
