@@ -18,6 +18,9 @@ public:
 
 	void AimTowardsCrosshair();
 
+	// Return an OUT parameter, true if hit landscape
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
