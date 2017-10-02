@@ -16,7 +16,14 @@ class TANKBATTLE_API ATankPlayerController : public APlayerController
 public:
 	ATank * GetControlledTank() const;
 
-protected:
+	void AimTowardsCrosshair();
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+
 
 };
