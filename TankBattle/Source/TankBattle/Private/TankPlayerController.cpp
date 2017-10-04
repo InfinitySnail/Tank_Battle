@@ -4,13 +4,6 @@
 #include "TankBattle.h"
 #include "Engine/World.h"
 
-
-
-
-
-
-
-
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
