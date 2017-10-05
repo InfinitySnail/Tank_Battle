@@ -15,7 +15,8 @@ class TANKBATTLE_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void AimAt(FVector WorldSpaceAim);
+
+	void AimAt(FVector OutHitLocation, float LaunchSpeed);
 
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
