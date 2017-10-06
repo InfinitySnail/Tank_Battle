@@ -14,23 +14,24 @@ UTankAimingComponent::UTankAimingComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
-	Barrel = BarrelToSet;
+	Barrel = BarrelToSet; // allow BeginPlay to set the referenced Barrel in blueprint
 }
 
 void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 {
-	Turret = TurretToSet;
+	Turret = TurretToSet; // allow BeginPlay to set the referenced Turret in blueprint
 }
 
 void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 {
-	if (!Barrel) { return; }
+	if (!Barrel) { return; } // if there is no barrel, do nothing
+
+	// define the suggested projectile velocity params
+
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
@@ -45,14 +46,14 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 	
-	if (bHaveAimSolution)
+	if (bHaveAimSolution) // if the object within the world can be found
 	{
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		MoveBarrelTowards(AimDirection);
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); // get the safe normal vector and move the barrel and turret 								
+		MoveBarrelTowards(AimDirection);					   // towards the crosshair aim direction
 		MoveTurretTowards(AimDirection);
 	
 		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution found"), Time);
+		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution found"), Time); // obtained per frame
 	}
 
 	else
@@ -71,7 +72,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString());
 
-	Barrel->ElevateBarrel(DeltaRotator.Pitch);
+	Barrel->ElevateBarrel(DeltaRotator.Pitch); // raise or lower the barrel as needed
 }
 
 void UTankAimingComponent::MoveTurretTowards(FVector AimTurretDirection)
@@ -82,5 +83,5 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimTurretDirection)
 	auto DeltaRotator = AimAsRotator - TurretRotator;
 	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString());
 
-	Turret->RotateTurret(DeltaRotator.Yaw);
+	Turret->RotateTurret(DeltaRotator.Yaw); // rotate the turret as needed
 }

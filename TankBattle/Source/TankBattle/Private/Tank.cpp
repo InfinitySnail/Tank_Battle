@@ -38,8 +38,5 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::AimAt(FVector OutHitLocation)
 {
-	TankAimingComponent->AimAt(OutHitLocation, LaunchSpeed);
-	
-	
-
+	TankAimingComponent->AimAt(OutHitLocation, LaunchSpeed); // Tell the tank to aim at the desired position represented by crosshair location
 }

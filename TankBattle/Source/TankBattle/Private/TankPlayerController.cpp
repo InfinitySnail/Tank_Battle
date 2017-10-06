@@ -8,8 +8,10 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank)
+	auto ControlledTank = GetControlledTank(); 
+
+	// check if the player controller is possessing a tank
+	if (!ControlledTank) 
 	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController not possessing a tank!"))
 	}
@@ -24,13 +26,11 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
-	
 }
 
 ATank* ATankPlayerController::GetControlledTank() const
 {
-	return Cast<ATank>(GetPawn());
-	
+	return Cast<ATank>(GetPawn()); // cast the tank to a Pawn and allow it to be controlled
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
@@ -41,7 +41,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	
 	if (GetSightRayHitLocation(OutHitLocation)) // will line trace
 	{
-		GetControlledTank()->AimAt(OutHitLocation);
+		GetControlledTank()->AimAt(OutHitLocation); // aim towards line traced
 	}	
 }
 
@@ -62,7 +62,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 		GetLookVectorHitLocation(LookDirection, OutHitLocation);
 	}
 	
-
 	return true;
 }
 
