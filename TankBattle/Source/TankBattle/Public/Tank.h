@@ -8,6 +8,8 @@
 #include "Tank.generated.h"
 
 class UTankBarrel; // Forward declaration
+class UTankAimingComponent; // Forward declaration
+class AProjectile; // Forward declaration
 
 UCLASS()
 class TANKBATTLE_API ATank : public APawn
@@ -42,6 +44,11 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 100000; // Sensible starting value of 1000m/s
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UTankBarrel* Barrel = nullptr; // local barrel reference for projectile spawning
 	
 }
 ;
