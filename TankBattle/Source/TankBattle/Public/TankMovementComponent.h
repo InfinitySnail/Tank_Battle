@@ -14,6 +14,7 @@ class TANKBATTLE_API UTankMovementComponent : public UNavMovementComponent
 {
 	GENERATED_BODY()
 
+		UFUNCTION(BlueprintCallable, Category = Input)
 		void IntendMoveForward(float ControlThrow); // ControlThrow is how far forward or back the thumbstick is moved
 
 	
