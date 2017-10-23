@@ -16,14 +16,11 @@ UTankAimingComponent::UTankAimingComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
-	Barrel = BarrelToSet; // allow BeginPlay to set the referenced Barrel in blueprint
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
-	Turret = TurretToSet; // allow BeginPlay to set the referenced Turret in blueprint
+	if (!BarrelToSet || !TurretToSet) { return; }
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
 }
 
 void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
@@ -66,6 +63,7 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!Barrel) { return; }
 	// Work out difference between current barrel rotation, and AimDirection
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
@@ -77,6 +75,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 void UTankAimingComponent::MoveTurretTowards(FVector AimTurretDirection)
 {
+	if (!Turret) { return; }
 	// Work out difference between current turret rotation, and AimDirection
 	auto TurretRotator = Turret->GetForwardVector().Rotation();
 	auto AimAsRotator = AimTurretDirection.Rotation();
