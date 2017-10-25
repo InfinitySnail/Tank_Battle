@@ -12,6 +12,11 @@ class TANKBATTLE_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
+
+protected:
+	UPROPERTY(EditAnywhere, Category = "Setup")
+		float AcceptanceRadius = 6000; // how close the AI tank can get
+
 private:
 		
 	virtual void BeginPlay() override;
@@ -19,6 +24,5 @@ private:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
-	float AcceptanceRadius = 12000; // how close the AI tank can get
+	
 };
