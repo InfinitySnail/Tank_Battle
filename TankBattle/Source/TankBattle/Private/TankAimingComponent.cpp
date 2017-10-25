@@ -45,6 +45,11 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	Turret = TurretToSet;
 }
 
+EFiringStatus UTankAimingComponent::GetFiringStatus() const
+{
+	return FiringStatus; // for use in AI aiming
+}
+
 void UTankAimingComponent::AimAt(FVector OutHitLocation)
 {
 	if (!ensure(Barrel)) { return; } // if there is no barrel, do nothing
@@ -116,3 +121,4 @@ void UTankAimingComponent::Fire()
 		LastFireTime = FPlatformTime::Seconds();
 	}
 }
+
