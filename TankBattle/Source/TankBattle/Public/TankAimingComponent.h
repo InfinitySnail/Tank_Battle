@@ -73,5 +73,7 @@ private:
 
 	double LastFireTime = 0; // for reload timer
 	FVector AimDirection;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	int32 RoundsLeft = 100;
 };
