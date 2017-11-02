@@ -19,8 +19,7 @@ public:
 	AProjectile();
 	void LaunchProjectile(float Speed);
 
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit);
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,6 +30,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit);
+
+	void OnTimerExpire();
+
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
@@ -44,4 +48,10 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
 	URadialForceComponent* ExplosionForce = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float DestroyDelay = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 20.f;
 };

@@ -18,11 +18,14 @@ protected:
 		float AcceptanceRadius = 6000; // how close the AI tank can get
 
 private:
-		
+	
+	virtual void SetPawn(APawn* InPawn) override;
+
 	virtual void BeginPlay() override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };
