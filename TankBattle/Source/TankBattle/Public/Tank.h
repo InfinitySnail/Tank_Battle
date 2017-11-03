@@ -38,7 +38,7 @@ private:
 	int32 StartingHealth = 200;
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
-	int32 CurrentHealth = StartingHealth;
+	int32 CurrentHealth; // initialized in BeginPlay
 
 	
 }

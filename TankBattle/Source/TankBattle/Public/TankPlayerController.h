@@ -43,4 +43,8 @@ private:
 	UPROPERTY(EditAnywhere)
 		float LineTraceRange = 100000.0;
 
+	UFUNCTION()
+		void OnPossessedTankDeath();
+
+	void SetPawn(APawn* InPawn);
 };
